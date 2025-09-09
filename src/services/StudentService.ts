@@ -51,4 +51,8 @@ export class StudentService {
     }
     return student;
   }
+
+  public async getAllStudents() {
+    return await Student.find().sort({ class: 1, name: 1 });
+  }
 }

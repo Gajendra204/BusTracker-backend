@@ -20,6 +20,12 @@ export class StudentRoutes {
       StudentController.getStudentsByRoute
     );
 
+    this.router.get(
+      '/',
+      this.authService.requireRole(UserRole.ADMIN),
+      StudentController.getAllStudents
+    );
+
     
     this.router.post(
       '/route/:routeId',

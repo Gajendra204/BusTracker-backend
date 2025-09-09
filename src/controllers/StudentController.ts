@@ -57,4 +57,14 @@ export class StudentController {
       errorResponse(res, error.message, error.message === "Student not found" ? 404 : 400);
     }
   }
+
+  public static async getAllStudents(req: Request, res: Response): Promise<void> {
+    try {
+      const students = await studentService.getAllStudents();
+      successResponse(res, students, "Students fetched successfully");
+    } catch (error: any) {
+      logger.error("Error fetching all students", { error: error.message });
+      errorResponse(res, error.message, 500);
+    }
+  }
 }
