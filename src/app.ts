@@ -23,7 +23,7 @@ class App {
   private initializeMiddlewares(): void {
     this.app.use(cors({
       origin: '*',
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: false
     }));

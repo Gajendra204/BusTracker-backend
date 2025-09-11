@@ -1,94 +1,123 @@
-# BusTracker Backend
+# Bus Tracker Backend
 
-A Node.js backend application for tracking school buses, managing routes, and ensuring safe student transportation.
+This repository contains the backend server for the Bus Tracker application, a real-time system for tracking school buses to enhance student safety and provide peace of mind for parents.
 
-## Features
+## Key Features
 
--  Real-time bus tracking
--  User management (Admin, Drivers, Parents)
--  Authentication and Authorization
--  Route management
--  Student management
--  Driver management
--  SMS notifications via Twilio
--  OTP-based authentication
--  Logging system
+*   **Real-time Bus Location Tracking:** Utilizes Firebase Real-time Database to track and broadcast bus locations.
+*   **User Authentication:** Secure JWT-based authentication for different user roles (Admin, Parent, Driver).
+*   **Role-based Access Control:** Middleware to protect routes based on user roles.
+*   **CRUD Operations** for:
+    *   Buses
+    *   Drivers
+    *   Students
+    *   Parents
+    *   Routes
+*   **OTP Verification:** Twilio integration for sending one-time passwords for phone verification.
+*   **Comprehensive Test Suite:** Unit and integration tests for controllers and services using Jest and Supertest.
 
-## Technologies Used
+## Tech Stack
 
-- Node.js with TypeScript
-- Express.js
-- Firebase Authentication
-- MongoDB (through Mongoose)
-- Twilio API for SMS
+*   **Backend:** Node.js, Express.js, TypeScript
+*   **Database:** MongoDB with Mongoose
+*   **Real-time Engine:** Firebase Real-time Database
+*   **Authentication:** JSON Web Tokens (JWT)
+*   **Testing:** Jest, Supertest
+*   **Messaging:** Twilio for OTP
+*   **Logging:** Winston
 
-## Project Structure
+## API Documentation
 
-```
-src/
-├── config/         # Configuration files (DB, Firebase)
-├── controllers/    # Request handlers
-├── interfaces/     # TypeScript interfaces
-├── middlewares/    # Custom middleware functions
-├── models/         # Database models
-├── routes/         # API routes
-├── services/       # Business logic
-└── utils/          # Utility functions
-```
+(You can add more detail here. Consider using a tool like Swagger or Postman to generate and host your API documentation.)
 
-## Prerequisites
+A basic overview of the available routes:
 
-- Node.js 
-- MongoDB
-- Firebase account
-- Twilio account
+*   `POST /api/auth/login`: User login
+*   `POST /api/auth/register`: User registration
+*   `GET /api/buses`: Get all buses
+*   `POST /api/buses`: Create a new bus
+*   ... and so on for drivers, students, routes, etc.
 
-## Installation
+## Getting Started
 
-1. Clone the repository:
+Follow these instructions to get the project up and running on your local machine.
 
-```bash
-git clone https://github.com/Gajendra204/BusTracker-backend.git
-cd BusTracker-backend
-```
+### Prerequisites
 
-2. Install dependencies:
+*   Node.js (v18 or later recommended)
+*   npm
+*   MongoDB instance (local or cloud-based like MongoDB Atlas)
 
-```bash
-npm install
-```
+### Installation & Setup
 
-3. Create a `.env` file in the root directory with the following variables:
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repository-url>
+    cd bus-tracker-backend
+    ```
 
-```
-PORT=your_port
-MONGODB_URI=your_mongodb_uri
-JWT_SECRET=your_jwt_secret
-TWILIO_ACCOUNT_SID=your_twilio_sid
-TWILIO_AUTH_TOKEN=your_twilio_token
-TWILIO_PHONE_NUMBER=your_twilio_phone
-```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-4. Set up your Firebase configuration in `serviceAccountKey.json`
+3.  **Create Environment Files:**
+    *   Create a `.env` file in the root directory. This file will hold your secret keys and configuration variables.
+    *   Create a `serviceAccountKey.json` file in the root directory. This file contains your Firebase service account credentials. You can get this from your Firebase project settings.
 
-## Running the Application
+    Your `.env` file should look like this:
+    ```
+    MONGO_URI=<Your_MongoDB_Connection_String>
+    JWT_SECRET=<Your_JWT_Secret_Key>
+    TWILIO_ACCOUNT_SID=<Your_Twilio_Account_SID>
+    TWILIO_AUTH_TOKEN=<Your_Twilio_Auth_Token>
+    TWILIO_PHONE_NUMBER=<Your_Twilio_Phone_Number>
+    ```
 
-Development mode:
+4.  **Build the project:**
+    The project is written in TypeScript and needs to be compiled to JavaScript.
+    ```bash
+    npm run build
+    ```
 
-```bash
-npm run dev
-```
+### Running the Application
 
-Production mode:
+*   **For development (with auto-reloading):**
+    ```bash
+    npm run dev
+    ```
+*   **For production:**
+    ```bash
+    npm start
+    ```
+The server will start on the port defined in your application (e.g., `http://localhost:3000`).
 
-```bash
-npm run build
-npm start
-```
+## Running Tests
 
-Run tests:
+This project uses Jest for testing. To run the test suite:
 
 ```bash
 npm test
 ```
 
+To run tests in watch mode:
+```bash
+npm test:watch
+```
+
+## Project Structure
+
+The project follows a standard MVC-like architecture:
+
+```
+src/
+├── controllers/  # Request handlers
+├── services/     # Business logic
+├── models/       # Mongoose data models
+├── routes/       # API route definitions
+├── middlewares/  # Custom middleware (e.g., auth)
+├── interfaces/   # TypeScript interfaces
+├── config/       # Database, Firebase configuration
+├── utils/        # Utility functions (e.g., logger)
+└── __tests__/    # Jest tests
+```
